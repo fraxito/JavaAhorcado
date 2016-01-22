@@ -1,10 +1,6 @@
 
-import java.awt.Graphics;
 import java.awt.Image;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -20,7 +16,7 @@ import javax.swing.JButton;
  */
 public class VentanaAhorcado extends javax.swing.JFrame {
 
-    String palabraOculta = "CETYS";
+    String palabraOculta = "";
     
     // contador para saber el número de fallos
     int numeroFallos = 0;
@@ -32,8 +28,37 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         initComponents();
         //aquí va el código que poniamos en el run en ACM
         cambiaImagenAhorcado();
+        eligePalabraOculta();
+        pintaGuionesEnLabel();
     }
 
+    private void eligePalabraOculta(){
+        String [] listaDePalabras = new String[10];
+        Random r = new Random();
+        
+        listaDePalabras[0] = "tal";
+        listaDePalabras[1] = "taluno";
+        listaDePalabras[2] = "taldos";
+        listaDePalabras[3] = "taltres";
+        listaDePalabras[4] = "talcuatro";
+        listaDePalabras[5] = "talcinco";
+        listaDePalabras[6] = "talseis";
+        listaDePalabras[7] = "talsiete";
+        listaDePalabras[8] = "talocho";
+        listaDePalabras[9] = "talnueve";
+
+        
+        palabraOculta = listaDePalabras[r.nextInt(9)];
+        System.out.println(palabraOculta);
+    }
+    
+    private void pintaGuionesEnLabel(){
+        jLabel1.setText("");
+        for (int i=0; i<palabraOculta.length(); i++){
+            jLabel1.setText(jLabel1.getText() + "_ ");
+        }
+    }
+    
     private void cambiaImagenAhorcado(){
         
         String nombreImagen = "";
@@ -61,7 +86,9 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     
     private void chequeaLetra(JButton boton){
         if (boton.isEnabled()){
-            String letra = boton.getText(); 
+            //cambio a minúsculas la letra del botón
+            String letra = boton.getText().toLowerCase();
+            System.out.println(letra);
             boton.setEnabled(false);
             String palabraConGuiones = jLabel1.getText();
 

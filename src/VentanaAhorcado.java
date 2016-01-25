@@ -47,7 +47,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         BufferedReader br = null;
         Random r = new Random();
         fichero = new File("src/lemario-20101017.txt");
-        String linea;
+        String linea ="";
         try {
             fr = new FileReader(fichero);
             br = new BufferedReader(fr);
@@ -74,6 +74,12 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         }
           catch (IOException ex) {
         }
+        palabraOculta = linea;
+        
+        //falta revisar las palabras con tilde o con guion
+        //falta revisar palabras con espacios en blanco 
+        //falta escribir la palabra si has perdido
+        
         
 //        
 //        String [] listaDePalabras = new String[10];

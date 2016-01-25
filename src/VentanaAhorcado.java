@@ -1,6 +1,13 @@
 
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -33,23 +40,59 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     }
 
     private void eligePalabraOculta(){
-        String [] listaDePalabras = new String[10];
+        
+        //Método básico de lectura de ficheros en Java
+        File fichero = null;
+        FileReader fr = null; 
+        BufferedReader br = null;
         Random r = new Random();
+        fichero = new File("src/lemario-20101017.txt");
+        String linea;
+        try {
+            fr = new FileReader(fichero);
+            br = new BufferedReader(fr);
+            
+            int numeroLineasFichero = 0;
+            
+            while ( (linea = br.readLine()) != null ){
+                numeroLineasFichero++;
+            }
+            System.out.println(numeroLineasFichero);
+            int lineaSeleccionada = r.nextInt(numeroLineasFichero);
+            System.out.println(lineaSeleccionada);
+            
+            fr.close();
+            fr = new FileReader(fichero);
+            br = new BufferedReader(fr);
+            
+            for (int i=0; i<lineaSeleccionada; i++){
+                linea = br.readLine();
+            }
+            System.out.println(linea);
+            
+        } catch (FileNotFoundException ex) {    
+        }
+          catch (IOException ex) {
+        }
         
-        listaDePalabras[0] = "tal";
-        listaDePalabras[1] = "taluno";
-        listaDePalabras[2] = "taldos";
-        listaDePalabras[3] = "taltres";
-        listaDePalabras[4] = "talcuatro";
-        listaDePalabras[5] = "talcinco";
-        listaDePalabras[6] = "talseis";
-        listaDePalabras[7] = "talsiete";
-        listaDePalabras[8] = "talocho";
-        listaDePalabras[9] = "talnueve";
-
-        
-        palabraOculta = listaDePalabras[r.nextInt(9)];
-        System.out.println(palabraOculta);
+//        
+//        String [] listaDePalabras = new String[10];
+//        
+//        
+//        listaDePalabras[0] = "tal";
+//        listaDePalabras[1] = "taluno";
+//        listaDePalabras[2] = "taldos";
+//        listaDePalabras[3] = "taltres";
+//        listaDePalabras[4] = "talcuatro";
+//        listaDePalabras[5] = "talcinco";
+//        listaDePalabras[6] = "talseis";
+//        listaDePalabras[7] = "talsiete";
+//        listaDePalabras[8] = "talocho";
+//        listaDePalabras[9] = "talnueve";
+//
+//        
+//        palabraOculta = listaDePalabras[r.nextInt(9)];
+//        System.out.println(palabraOculta);
     }
     
     private void pintaGuionesEnLabel(){
@@ -156,6 +199,8 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
         jButton28 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -382,6 +427,12 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         getContentPane().add(jButton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 454, 42, 42));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 200, 200));
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 330, 220));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -558,5 +609,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
